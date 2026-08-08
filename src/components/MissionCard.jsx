@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Clock, Award, CheckCircle2, Lock } from 'lucide-react';
+import { ArrowRight, Clock, CheckCircle2 } from 'lucide-react';
 import Button from './Button';
 
 export default function MissionCard({
@@ -9,66 +9,60 @@ export default function MissionCard({
   duration = "45 min",
   goal = "Build a REST API supporting CRUD operations.",
   status = "current", // "completed" | "current" | "upcoming"
-  ctaText = "Start Challenge",
+  ctaText = "Continue Mission",
   onCtaClick = () => {},
   className = ''
 }) {
-  const isCurrent = status === 'current';
   const isCompleted = status === 'completed';
 
-  const difficultyColors = {
-    Beginner: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/30',
-    Intermediate: 'text-[#CCFF00] bg-[#CCFF00]/10 border-[#CCFF00]/30',
-    Advanced: 'text-amber-400 bg-amber-400/10 border-amber-400/30',
-  };
-
   return (
-    <div className={`bg-[#111113] border ${isCurrent ? 'border-[#CCFF00]/50 shadow-[0_0_20px_rgba(204,255,0,0.1)]' : 'border-[#27272A]'} rounded-2xl p-4 transition-all duration-200 ${className}`}>
+    <div className={`bg-white border-2 border-emerald-500/80 shadow-[0_4px_25px_rgba(22,163,74,0.12)] rounded-2xl p-5 transition-all duration-200 ${className}`}>
       {/* Header Badges */}
       <div className="flex items-center justify-between gap-2 mb-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold font-mono text-[#CCFF00] bg-[#18181B] px-2.5 py-1 rounded-lg border border-[#27272A]">
+          <span className="text-xs font-black font-mono text-white bg-emerald-600 px-2.5 py-0.5 rounded-full font-bold shadow-xs">
             DAY {day}
           </span>
-          <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border ${difficultyColors[difficulty] || difficultyColors.Intermediate}`}>
+          <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 font-mono">
             {difficulty}
           </span>
         </div>
 
-        <div className="flex items-center gap-1 text-xs text-[#A1A1AA] font-mono">
-          <Clock className="w-3.5 h-3.5" />
+        <div className="flex items-center gap-1 text-xs text-slate-500 font-mono">
+          <Clock className="w-3.5 h-3.5 text-emerald-600" />
           <span>{duration}</span>
         </div>
       </div>
 
       {/* Challenge Title & Goal */}
-      <h3 className="text-base font-bold text-[#F5F5F5] tracking-tight group-hover:text-[#CCFF00] transition-colors mb-1">
+      <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
         {title}
       </h3>
       
       {goal && (
-        <p className="text-xs text-[#A1A1AA] line-clamp-2 mb-4 leading-relaxed font-normal">
-          {goal}
+        <p className="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed font-normal">
+          Goal: {goal}
         </p>
       )}
 
       {/* CTA Button / Status Footer */}
-      <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#27272A]/80">
+      <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
         {isCompleted ? (
-          <div className="w-full flex items-center justify-between text-xs font-semibold text-emerald-400 bg-emerald-400/10 px-3 py-2 rounded-xl border border-emerald-400/30">
+          <div className="w-full flex items-center justify-between text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-2 rounded-full border border-emerald-200">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4" /> Challenge Completed
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Challenge Completed
             </span>
-            <span className="font-mono text-[10px] uppercase">Done</span>
+            <span className="font-mono text-[10px] uppercase font-bold">Done</span>
           </div>
         ) : (
           <Button
-            variant={isCurrent ? 'primary' : 'secondary'}
-            size="md"
+            variant="primary"
+            size="lg"
             fullWidth
             icon={ArrowRight}
             iconPosition="right"
             onClick={onCtaClick}
+            className="text-base py-3.5 shadow-[0_4px_16px_rgba(22,163,74,0.25)]"
           >
             {ctaText}
           </Button>

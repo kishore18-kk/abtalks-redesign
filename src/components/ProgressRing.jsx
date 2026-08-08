@@ -4,10 +4,10 @@ export default function ProgressRing({
   percentage = 0,
   label = null,
   sublabel = null,
-  size = 90,
-  strokeWidth = 8,
-  strokeColor = '#CCFF00',
-  trackColor = '#27272A',
+  size = 76,
+  strokeWidth = 7,
+  strokeColor = '#16A34A',
+  trackColor = '#E2E8F0',
   className = ''
 }) {
   const radius = (size - strokeWidth) / 2;
@@ -49,16 +49,16 @@ export default function ProgressRing({
       {/* Inner Label Container */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-1">
         {label !== null ? (
-          <span className="font-extrabold text-sm text-[#F5F5F5] font-mono leading-none">
+          <span className="font-extrabold text-sm text-slate-900 font-mono leading-none">
             {label}
           </span>
         ) : (
-          <span className="font-extrabold text-sm text-[#CCFF00] font-mono leading-none">
+          <span className="font-extrabold text-sm text-emerald-600 font-mono leading-none">
             {Math.round(clampedPercentage)}%
           </span>
         )}
         {sublabel && (
-          <span className="text-[10px] text-[#A1A1AA] mt-0.5 tracking-tight font-sans">
+          <span className="text-[10px] text-slate-500 mt-0.5 tracking-tight font-sans font-medium">
             {sublabel}
           </span>
         )}

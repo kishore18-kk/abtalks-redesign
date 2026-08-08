@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, Send, ExternalLink, Clock, Sparkles, Code, Link2 } from 'lucide-react';
+import { CheckCircle2, Send, Clock, Sparkles } from 'lucide-react';
 import Button from './Button';
 import { proofSubmissionData } from '../data/mockData';
 
@@ -38,28 +38,28 @@ export default function ProofCard({
   const isSubmitted = status === 'submitted' || status === 'verified';
 
   return (
-    <div className={`bg-[#111113] border border-[#27272A] rounded-2xl p-4 ${className}`}>
+    <div className={`bg-white border border-slate-200/90 rounded-2xl p-5 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)] ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between gap-2 mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-[#18181B] border border-[#CCFF00]/40 flex items-center justify-center text-[#CCFF00]">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 font-bold">
             <Sparkles className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-xs font-bold text-[#F5F5F5]">
+            <h3 className="text-xs font-bold text-slate-900">
               Proof of Work Submission
             </h3>
-            <p className="text-[10px] text-[#A1A1AA]">
+            <p className="text-[10px] text-slate-500 font-mono">
               Day 12 • Build a REST API
             </p>
           </div>
         </div>
 
         <span
-          className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border uppercase ${
+          className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border uppercase ${
             isSubmitted
-              ? 'text-emerald-400 bg-emerald-400/10 border-emerald-400/30'
-              : 'text-[#CCFF00] bg-[#CCFF00]/10 border-[#CCFF00]/30'
+              ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+              : 'text-amber-700 bg-amber-50 border-amber-200'
           }`}
         >
           {isSubmitted ? 'Submitted' : 'Pending'}
@@ -67,15 +67,15 @@ export default function ProofCard({
       </div>
 
       {/* Form or Submitted Display */}
-      <form onSubmit={handleSubmit} className="space-[#3]">
+      <form onSubmit={handleSubmit} className="space-y-3">
         {/* GitHub URL Input */}
-        <div className="mb-3">
-          <label className="block text-[11px] font-mono text-[#A1A1AA] mb-1">
+        <div>
+          <label className="block text-[11px] font-mono font-medium text-slate-600 mb-1">
             GitHub Repository URL
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#71717A]">
-              <GithubIcon className="w-4 h-4 text-[#F5F5F5]" />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <GithubIcon className="w-4 h-4 text-slate-700" />
             </div>
             <input
               type="url"
@@ -83,19 +83,19 @@ export default function ProofCard({
               value={githubUrl}
               onChange={(e) => setGithubUrl(e.target.value)}
               placeholder="https://github.com/username/repo"
-              className="w-full pl-9 pr-3 py-2 bg-[#18181B] border border-[#27272A] rounded-xl text-xs text-[#F5F5F5] placeholder-[#71717A] focus:outline-none focus:border-[#CCFF00] focus:ring-1 focus:ring-[#CCFF00]"
+              className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white font-mono"
             />
           </div>
         </div>
 
         {/* LinkedIn Post URL Input */}
-        <div className="mb-4">
-          <label className="block text-[11px] font-mono text-[#A1A1AA] mb-1">
+        <div>
+          <label className="block text-[11px] font-mono font-medium text-slate-600 mb-1">
             LinkedIn Proof Post URL
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#71717A]">
-              <LinkedinIcon className="w-4 h-4 text-sky-400" />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <LinkedinIcon className="w-4 h-4 text-sky-600" />
             </div>
             <input
               type="url"
@@ -103,22 +103,22 @@ export default function ProofCard({
               value={linkedinUrl}
               onChange={(e) => setLinkedinUrl(e.target.value)}
               placeholder="https://linkedin.com/posts/..."
-              className="w-full pl-9 pr-3 py-2 bg-[#18181B] border border-[#27272A] rounded-xl text-xs text-[#F5F5F5] placeholder-[#71717A] focus:outline-none focus:border-[#CCFF00] focus:ring-1 focus:ring-[#CCFF00]"
+              className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:bg-white font-mono"
             />
           </div>
         </div>
 
         {/* Status / Submit button */}
         {isSubmitted ? (
-          <div className="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center justify-between text-xs text-emerald-400">
+          <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center justify-between text-xs text-emerald-800 font-medium">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 shrink-0" />
-              <span>Proof submitted successfully! Streak locked for Day 12.</span>
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Proof submitted! Streak locked for Day 12.</span>
             </div>
             <button
               type="button"
               onClick={() => setStatus('pending')}
-              className="text-[10px] text-[#A1A1AA] hover:text-[#F5F5F5] underline font-mono ml-2"
+              className="text-[10px] text-slate-500 hover:text-slate-800 underline font-mono ml-2"
             >
               Edit
             </button>

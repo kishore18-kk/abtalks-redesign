@@ -7,19 +7,12 @@ import {
   Zap,
   Flame,
   CheckCircle2,
-  Code2,
   Terminal,
   Share2,
-  FolderGit2,
   Trophy,
   Rocket,
   Layers,
-  ShieldCheck,
-  TrendingUp,
-  Sparkles,
-  Users,
-  Check,
-  Lock
+  TrendingUp
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import BottomNav from '../components/BottomNav';
@@ -36,29 +29,25 @@ export default function Landing() {
       step: '01',
       title: 'Pick Your Track',
       description: 'Select Fullstack, Backend, or Web Engineering. Clear daily tasks structured for college students.',
-      icon: Layers,
-      color: 'text-sky-400 bg-sky-400/10 border-sky-400/30'
+      icon: Layers
     },
     {
       step: '02',
       title: 'Build Every Day',
       description: 'Solve 45-minute production missions. Write real functional code instead of watching endless tutorials.',
-      icon: Terminal,
-      color: 'text-[#CCFF00] bg-[#CCFF00]/10 border-[#CCFF00]/30'
+      icon: Terminal
     },
     {
       step: '03',
       title: 'Share Your Proof',
       description: 'Submit your GitHub repository and LinkedIn post to lock in your daily streak and earn XP.',
-      icon: Share2,
-      color: 'text-[#CCFF00] bg-[#CCFF00]/10 border-[#CCFF00]/30'
+      icon: Share2
     },
     {
       step: '04',
       title: 'Build Your Portfolio',
       description: 'Graduate with 60 verified builds, an active developer profile, and proof of work for recruiters.',
-      icon: Trophy,
-      color: 'text-amber-400 bg-amber-400/10 border-amber-400/30'
+      icon: Trophy
     }
   ];
 
@@ -92,10 +81,10 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#09090B] text-[#F5F5F5] pb-24 font-sans max-w-md mx-auto relative border-x border-[#27272A]/50 overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAF9] text-slate-900 pb-28 font-sans max-w-md mx-auto relative border-x border-slate-200/60 overflow-x-hidden">
       <Navbar />
 
-      <main className="px-4 pt-4 space-y-8">
+      <main className="px-4 pt-4 space-y-7">
         {/* ================= 1. HERO SECTION ================= */}
         <motion.section
           initial={{ opacity: 0, y: 15 }}
@@ -104,21 +93,21 @@ export default function Landing() {
           className="pt-2 space-y-4"
         >
           {/* Top Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181B] border border-[#CCFF00]/40 text-[#CCFF00] text-xs font-mono shadow-[0_0_15px_rgba(204,255,0,0.15)]">
-            <Zap className="w-3.5 h-3.5 fill-[#CCFF00]/20 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-mono font-bold shadow-xs">
+            <Zap className="w-3.5 h-3.5 text-emerald-600 fill-emerald-500/20" />
             <span>60-Day Developer Challenge</span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-3xl font-extrabold tracking-tight leading-[1.15] text-[#F5F5F5] uppercase">
+          <h1 className="text-3xl font-black tracking-tight leading-[1.15] text-slate-900 uppercase">
             60 DAYS. 60 BUILDS.<br />
-            <span className="text-[#CCFF00] drop-shadow-[0_0_20px_rgba(204,255,0,0.25)]">
+            <span className="text-emerald-600">
               ONE STRONGER YOU.
             </span>
           </h1>
 
           {/* Supporting Text */}
-          <p className="text-sm text-[#A1A1AA] leading-relaxed font-normal">
+          <p className="text-sm text-slate-600 leading-relaxed font-normal">
             Build one real project every day, maintain an unbroken public streak, and transform your GitHub into a job-ready portfolio in 60 days.
           </p>
 
@@ -150,47 +139,47 @@ export default function Landing() {
           </div>
 
           {/* Hero Concept Preview Card */}
-          <div className="mt-4 p-4 rounded-2xl bg-[#111113] border border-[#27272A] relative overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-[#CCFF00]/10 rounded-full blur-xl pointer-events-none" />
-            
-            <div className="flex items-center justify-between gap-2 mb-3">
+          <div className="mt-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)] relative overflow-hidden space-y-3">
+            <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
-                <span className="text-xs font-mono font-bold text-[#F5F5F5]">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span className="text-xs font-mono font-bold text-slate-900">
                   Sprint In Progress
                 </span>
               </div>
-              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-[#CCFF00]/10 text-[#CCFF00] border border-[#CCFF00]/30">
+              <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                 DAY 12 OF 60
               </span>
             </div>
 
-            <div className="flex items-center gap-3 bg-[#18181B] p-3 rounded-xl border border-[#27272A] mb-3">
+            <div className="flex items-center gap-3 bg-slate-50/80 p-3 rounded-xl border border-slate-200/70">
               <ProgressRing
                 percentage={studentData.completion}
                 size={54}
-                strokeWidth={6}
+                strokeWidth={5}
                 label={`${studentData.streak}d`}
+                strokeColor="#16A34A"
+                trackColor="#E2E8F0"
               />
               <div className="flex-1 min-w-0">
-                <div className="text-xs font-bold text-[#F5F5F5] truncate">
+                <div className="text-xs font-bold text-slate-900 truncate">
                   Today: {todayChallenge.title}
                 </div>
-                <p className="text-[11px] text-[#A1A1AA] line-clamp-1">
+                <p className="text-[11px] text-slate-500 line-clamp-1">
                   {todayChallenge.goal}
                 </p>
-                <div className="flex items-center gap-1 mt-1 text-[10px] font-mono text-emerald-400">
-                  <CheckCircle2 className="w-3 h-3" /> Proof Verified • +150 XP
+                <div className="flex items-center gap-1 mt-1 text-[10px] font-mono text-emerald-700 font-bold">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Proof Verified • +150 XP
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between text-[11px] font-mono text-[#71717A]">
-              <span className="flex items-center gap-1 text-[#A1A1AA]">
-                <Flame className="w-3.5 h-3.5 text-[#CCFF00] fill-[#CCFF00]/20" />
+            <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-1">
+              <span className="flex items-center gap-1 text-slate-700 font-sans font-medium">
+                <Flame className="w-3.5 h-3.5 text-emerald-600 fill-emerald-500/20" />
                 {studentData.streak} Day Streak
               </span>
-              <span className="text-[#CCFF00]">Stage: {momentumInfo.stage}</span>
+              <span className="text-emerald-700 font-bold">Stage: {momentumInfo.stage}</span>
             </div>
           </div>
         </motion.section>
@@ -204,10 +193,10 @@ export default function Landing() {
           className="space-y-3 pt-2"
         >
           <div className="text-center space-y-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[#CCFF00]">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-emerald-700">
               Built for Indian Tech Colleges
             </span>
-            <h2 className="text-sm font-bold text-[#A1A1AA] tracking-tight">
+            <h2 className="text-sm font-bold text-slate-600 tracking-tight">
               Empowering students through daily consistency
             </h2>
           </div>
@@ -216,13 +205,13 @@ export default function Landing() {
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="p-3.5 rounded-2xl bg-[#111113] border border-[#27272A] text-center space-y-1"
+                className="p-4 rounded-2xl bg-white border border-slate-200/90 text-center space-y-0.5 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]"
               >
-                <div className="text-2xl font-black font-mono text-[#CCFF00] tracking-tight">
+                <div className="text-2xl font-black font-mono text-emerald-600 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-xs font-bold text-[#F5F5F5]">{stat.label}</div>
-                <div className="text-[10px] text-[#A1A1AA] font-mono">{stat.sub}</div>
+                <div className="text-xs font-bold text-slate-900">{stat.label}</div>
+                <div className="text-[10px] text-slate-500 font-mono">{stat.sub}</div>
               </div>
             ))}
           </div>
@@ -238,13 +227,13 @@ export default function Landing() {
           className="space-y-4 pt-2"
         >
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold text-[#CCFF00] uppercase tracking-wider">
+            <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-wider">
               HOW IT WORKS
             </span>
-            <h2 className="text-xl font-extrabold text-[#F5F5F5] tracking-tight">
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">
               4 Steps to Industry Readiness
             </h2>
-            <p className="text-xs text-[#A1A1AA]">
+            <p className="text-xs text-slate-600">
               A proven framework to build coding habits that stick for life.
             </p>
           </div>
@@ -255,20 +244,20 @@ export default function Landing() {
               return (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-[#111113] border border-[#27272A] flex items-start gap-3.5 relative overflow-hidden"
+                  className="p-4 rounded-2xl bg-white border border-slate-200/90 flex items-start gap-3.5 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#18181B] border border-[#27272A] flex items-center justify-center shrink-0 text-[#CCFF00] font-mono font-bold text-sm">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0 text-emerald-700 font-mono font-bold text-sm">
                     {s.step}
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <Icon className="w-4 h-4 text-[#CCFF00]" />
-                      <h3 className="text-sm font-bold text-[#F5F5F5] truncate">
+                      <Icon className="w-4 h-4 text-emerald-600" />
+                      <h3 className="text-sm font-bold text-slate-900 truncate">
                         {s.title}
                       </h3>
                     </div>
-                    <p className="text-xs text-[#A1A1AA] leading-relaxed font-normal">
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
                       {s.description}
                     </p>
                   </div>
@@ -287,13 +276,13 @@ export default function Landing() {
           className="space-y-4 pt-2"
         >
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold text-[#CCFF00] uppercase tracking-wider">
+            <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-wider">
               THE 60-DAY ROADMAP
             </span>
-            <h2 className="text-xl font-extrabold text-[#F5F5F5] tracking-tight">
+            <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">
               Curriculum Built for Impact
             </h2>
-            <p className="text-xs text-[#A1A1AA]">
+            <p className="text-xs text-slate-600">
               From core DOM manipulation to production APIs and deployment.
             </p>
           </div>
@@ -306,30 +295,30 @@ export default function Landing() {
             {journeyPhases.map((phase, idx) => (
               <div
                 key={idx}
-                className={`p-3.5 rounded-2xl border transition-all ${
+                className={`p-4 rounded-2xl border transition-all ${
                   phase.highlight
-                    ? 'bg-[#111113] border-[#CCFF00]/50 shadow-[0_0_20px_rgba(204,255,0,0.1)]'
-                    : 'bg-[#111113]/60 border-[#27272A]'
+                    ? 'bg-white border-2 border-emerald-500/80 shadow-[0_4px_25px_rgba(22,163,74,0.1)]'
+                    : 'bg-white border-slate-200/90'
                 }`}
               >
                 <div className="flex items-center justify-between gap-2 mb-1">
-                  <span className="text-[11px] font-mono font-bold text-[#CCFF00]">
+                  <span className="text-[11px] font-mono font-bold text-emerald-700">
                     {phase.phase}
                   </span>
                   <span
-                    className={`text-[9px] font-mono px-2 py-0.5 rounded-full border font-semibold ${
+                    className={`text-[9px] font-mono px-2.5 py-0.5 rounded-full border font-semibold ${
                       phase.highlight
-                        ? 'bg-[#CCFF00]/20 text-[#CCFF00] border-[#CCFF00]/40 animate-pulse'
-                        : 'bg-[#18181B] text-[#A1A1AA] border-[#27272A]'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold'
+                        : 'bg-slate-50 text-slate-500 border-slate-200'
                     }`}
                   >
                     {phase.status}
                   </span>
                 </div>
-                <h4 className="text-xs font-bold text-[#F5F5F5] mb-1">
+                <h4 className="text-xs font-bold text-slate-900 mb-1">
                   {phase.title}
                 </h4>
-                <p className="text-[11px] text-[#A1A1AA] leading-snug">
+                <p className="text-[11px] text-slate-600 leading-snug">
                   {phase.desc}
                 </p>
               </div>
@@ -343,36 +332,34 @@ export default function Landing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="p-5 rounded-2xl bg-[#111113] border border-[#27272A] space-y-4 relative overflow-hidden"
+          className="p-5 rounded-2xl bg-white border border-slate-200/90 space-y-4 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]"
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#CCFF00]/10 rounded-full blur-3xl pointer-events-none" />
-
           <div className="space-y-1.5">
-            <span className="text-xs font-mono font-bold text-[#CCFF00] uppercase tracking-wider flex items-center gap-1.5">
-              <TrendingUp className="w-4 h-4" /> Philosophy
+            <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
+              <TrendingUp className="w-4 h-4 text-emerald-600" /> Philosophy
             </span>
-            <h2 className="text-xl font-black text-[#F5F5F5] tracking-tight uppercase">
+            <h2 className="text-xl font-black text-slate-900 tracking-tight uppercase">
               &quot;Consistency Compounds.&quot;
             </h2>
           </div>
 
-          <p className="text-xs text-[#A1A1AA] leading-relaxed font-normal">
+          <p className="text-xs text-slate-600 leading-relaxed font-normal">
             Cramming tutorials before placement season yields temporary recall. Building 45 minutes every day for 60 days builds muscle memory, confidence, and proof of work.
           </p>
 
-          {/* Compound Graph Comparison Visual */}
-          <div className="p-3 bg-[#18181B] rounded-xl border border-[#27272A] space-y-2 font-mono text-xs">
-            <div className="flex items-center justify-between text-[#A1A1AA]">
+          {/* Compound Comparison */}
+          <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2 font-mono text-xs">
+            <div className="flex items-center justify-between text-slate-600">
               <span>Day 1:</span>
-              <span className="text-[#F5F5F5]">1 Micro Build (First Step)</span>
+              <span className="text-slate-900 font-medium">1 Micro Build (First Step)</span>
             </div>
-            <div className="flex items-center justify-between text-[#A1A1AA]">
+            <div className="flex items-center justify-between text-slate-600">
               <span>Day 30:</span>
-              <span className="text-[#CCFF00]">30 Verified Projects (Habit)</span>
+              <span className="text-emerald-700 font-bold">30 Verified Projects (Habit)</span>
             </div>
-            <div className="flex items-center justify-between font-bold text-[#F5F5F5] pt-1 border-t border-[#27272A]">
+            <div className="flex items-center justify-between font-bold text-slate-900 pt-1 border-t border-slate-200/70">
               <span>Day 60:</span>
-              <span className="text-[#CCFF00]">60 Builds + Unstoppable Rank</span>
+              <span className="text-emerald-700 font-bold">60 Builds + Unstoppable Rank</span>
             </div>
           </div>
         </motion.section>
@@ -383,17 +370,17 @@ export default function Landing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="p-6 rounded-2xl bg-[#111113] border border-[#CCFF00]/40 text-center space-y-4 shadow-[0_0_30px_rgba(204,255,0,0.12)] relative overflow-hidden"
+          className="p-6 rounded-2xl bg-white border-2 border-emerald-500/80 text-center space-y-4 shadow-[0_4px_25px_rgba(22,163,74,0.12)] relative overflow-hidden"
         >
-          <div className="w-12 h-12 rounded-2xl bg-[#18181B] border border-[#CCFF00]/40 flex items-center justify-center mx-auto text-[#CCFF00] shadow-[0_0_15px_rgba(204,255,0,0.2)]">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600 shadow-xs">
             <Rocket className="w-6 h-6" />
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-2xl font-extrabold text-[#F5F5F5] tracking-tight uppercase leading-tight">
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight uppercase leading-tight">
               Your next 60 days could change your career.
             </h2>
-            <p className="text-xs text-[#A1A1AA] max-w-xs mx-auto">
+            <p className="text-xs text-slate-600 max-w-xs mx-auto">
               Join 10,000+ Indian tech students building real applications line by line.
             </p>
           </div>
@@ -410,7 +397,7 @@ export default function Landing() {
             </Button>
           </Link>
 
-          <p className="text-[10px] font-mono text-[#71717A]">
+          <p className="text-[10px] font-mono text-slate-500">
             100% Free • Open Source Proof • College Student Optimized
           </p>
         </motion.section>

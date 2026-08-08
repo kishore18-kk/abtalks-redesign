@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, LayoutDashboard, Flame, Trophy, Award } from 'lucide-react';
+import { Home, LayoutDashboard, Flame } from 'lucide-react';
 
 export default function BottomNav() {
   const location = useLocation();
@@ -25,8 +25,8 @@ export default function BottomNav() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#09090B]/95 backdrop-blur-lg border-t border-[#27272A] py-2 px-4 max-w-md mx-auto">
-      <nav className="flex items-center justify-around">
+    <div className="fixed bottom-3 left-0 right-0 z-50 px-4 pointer-events-none">
+      <div className="max-w-[390px] mx-auto bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.08)] rounded-full py-2 px-6 pointer-events-auto flex items-center justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
@@ -35,28 +35,28 @@ export default function BottomNav() {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all duration-150 relative active-press ${
-                isActive ? 'text-[#CCFF00]' : 'text-[#A1A1AA] hover:text-[#F5F5F5]'
+              className={`flex flex-col items-center justify-center py-1 px-3 transition-all duration-150 relative active-press ${
+                isActive ? 'text-emerald-600' : 'text-slate-400 hover:text-slate-700'
               }`}
             >
               <div className="relative">
                 <Icon className={`w-5 h-5 ${isActive ? 'scale-110' : ''}`} />
                 {item.badge && (
-                  <span className="absolute -top-1 -right-2 text-[9px] font-mono font-bold bg-[#CCFF00] text-[#09090B] px-1 rounded-full">
+                  <span className="absolute -top-1 -right-2 text-[9px] font-mono font-bold bg-emerald-600 text-white px-1.5 rounded-full shadow-xs">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className={`text-[10px] mt-1 font-medium ${isActive ? 'font-bold' : ''}`}>
+              <span className={`text-[10px] mt-0.5 font-medium ${isActive ? 'font-bold text-slate-900' : ''}`}>
                 {item.label}
               </span>
               {isActive && (
-                <span className="absolute bottom-0 w-4 h-0.5 bg-[#CCFF00] rounded-full" />
+                <span className="absolute -bottom-1 w-4 h-1 bg-emerald-600 rounded-full" />
               )}
             </Link>
           );
         })}
-      </nav>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Shield, Code, Zap, Trophy, Rocket, Lock, CheckCircle } from 'lucide-react';
+import { Flame, Shield, Code, Zap, Trophy, Rocket } from 'lucide-react';
 
 const iconMap = {
   Flame,
@@ -25,8 +25,8 @@ export default function AchievementCard({
     <div
       className={`relative p-3.5 rounded-2xl border transition-all duration-200 ${
         unlocked
-          ? 'bg-[#111113] border-[#CCFF00]/40 shadow-[0_0_15px_rgba(204,255,0,0.1)]'
-          : 'bg-[#111113]/50 border-[#27272A] opacity-60 grayscale'
+          ? 'bg-white border-emerald-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+          : 'bg-slate-50/70 border-slate-200/80 opacity-60'
       } ${className}`}
     >
       <div className="flex items-start gap-3">
@@ -34,8 +34,8 @@ export default function AchievementCard({
         <div
           className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${
             unlocked
-              ? 'bg-[#18181B] border-[#CCFF00]/40 text-[#CCFF00]'
-              : 'bg-[#18181B] border-[#27272A] text-[#71717A]'
+              ? 'bg-emerald-50 border-emerald-200 text-emerald-600'
+              : 'bg-slate-100 border-slate-200 text-slate-400'
           }`}
         >
           {IconComponent && <IconComponent className="w-5 h-5" />}
@@ -44,25 +44,25 @@ export default function AchievementCard({
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between gap-1 mb-0.5">
-            <h4 className="text-xs font-bold text-[#F5F5F5] truncate">
+            <h4 className="text-xs font-bold text-slate-900 truncate">
               {title}
             </h4>
             <span
-              className={`text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded border uppercase ${
+              className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border uppercase ${
                 unlocked
-                  ? 'text-[#CCFF00] bg-[#CCFF00]/10 border-[#CCFF00]/30'
-                  : 'text-[#71717A] bg-[#18181B] border-[#27272A]'
+                  ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                  : 'text-slate-500 bg-slate-100 border-slate-200'
               }`}
             >
               {unlocked ? 'Unlocked' : 'Locked'}
             </span>
           </div>
 
-          <p className="text-[11px] text-[#A1A1AA] leading-snug line-clamp-2">
+          <p className="text-[11px] text-slate-500 leading-snug line-clamp-2">
             {description}
           </p>
 
-          <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-[#71717A]">
+          <div className="mt-2 flex items-center justify-between text-[10px] font-mono text-slate-400">
             <span>Rarity: {rarity}</span>
             <span>{unlockedAt}</span>
           </div>

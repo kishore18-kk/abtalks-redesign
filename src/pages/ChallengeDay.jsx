@@ -1,31 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   ArrowLeft,
-  CheckCircle2,
   Clock,
   Code2,
-  ExternalLink,
   Sparkles,
   Flame,
   Moon,
-  Sun,
   ShieldCheck,
   CheckSquare,
   Square,
-  Layers,
   Send,
   AlertTriangle,
-  Award,
   Check,
   Sliders,
-  Terminal,
-  RotateCcw
+  Terminal
 } from 'lucide-react';
 import Button from '../components/Button';
 import BottomNav from '../components/BottomNav';
-import { todayChallenge, proofSubmissionData, studentData, mockEdgeCases } from '../data/mockData';
+import { todayChallenge, proofSubmissionData, mockEdgeCases } from '../data/mockData';
 
 // Custom SVG Icons for GitHub and LinkedIn
 const GithubIcon = ({ className = "w-4 h-4" }) => (
@@ -45,11 +39,11 @@ export default function ChallengeDay() {
   const navigate = useNavigate();
   const currentDayNum = dayId ? parseInt(dayId, 10) : 12;
 
-  // Focus Mode toggle (Night Mode for late-night college coding sessions)
+  // Focus Mode toggle (Night Mode for late-night college study sessions)
   const [isFocusMode, setIsFocusMode] = useState(false);
 
   // Demo Edge Case State Selector
-  const [demoState, setDemoState] = useState('active'); // 'active' | 'completed' | 'missed' | 'day1'
+  const [demoState, setDemoState] = useState('active'); // 'active' | 'completed' | 'missed'
 
   // Task Checklist State
   const [checklist, setChecklist] = useState([
@@ -82,11 +76,6 @@ export default function ChallengeDay() {
     } else if (demoState === 'missed') {
       setGithubVerified(false);
       setLinkedinVerified(false);
-    } else if (demoState === 'day1') {
-      setGithubVerified(false);
-      setLinkedinVerified(false);
-      setGithubUrl('');
-      setLinkedinUrl('');
     }
   }, [demoState]);
 
@@ -126,21 +115,25 @@ export default function ChallengeDay() {
     <div
       className={`min-h-screen font-sans max-w-md mx-auto relative border-x transition-colors duration-300 ${
         isFocusMode
-          ? 'bg-[#050507] text-[#F5F5F5] border-[#18181B] pb-32'
-          : 'bg-[#09090B] text-[#F5F5F5] border-[#27272A]/50 pb-24'
+          ? 'bg-[#0A0F1D] text-[#F8FAFC] border-slate-800 pb-32'
+          : 'bg-[#F8FAF9] text-slate-900 border-slate-200/60 pb-28'
       }`}
     >
       {/* ================= 1. TOP HEADER ================= */}
       <header
         className={`sticky top-0 z-40 backdrop-blur-md border-b px-4 py-3 transition-colors ${
-          isFocusMode ? 'bg-[#050507]/95 border-[#18181B]' : 'bg-[#09090B]/90 border-[#27272A]'
+          isFocusMode
+            ? 'bg-[#0A0F1D]/95 border-slate-800'
+            : 'bg-[#F8FAF9]/90 border-slate-200/80'
         }`}
       >
         <div className="flex items-center justify-between">
           {/* Back Button -> /dashboard */}
           <Link
             to="/dashboard"
-            className="flex items-center gap-1.5 text-xs text-[#A1A1AA] hover:text-[#CCFF00] font-mono transition-colors active-press"
+            className={`flex items-center gap-1.5 text-xs font-mono transition-colors active-press ${
+              isFocusMode ? 'text-slate-400 hover:text-emerald-400' : 'text-slate-600 hover:text-slate-900'
+            }`}
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Dashboard</span>
@@ -148,13 +141,19 @@ export default function ChallengeDay() {
 
           {/* Badge: DAY 12 OF 60 */}
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold text-[#CCFF00] bg-[#CCFF00]/10 px-2.5 py-0.5 rounded-full border border-[#CCFF00]/30">
+            <span
+              className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
+                isFocusMode
+                  ? 'text-emerald-400 bg-emerald-400/10 border-emerald-400/30'
+                  : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+              }`}
+            >
               DAY {currentDayNum} OF 60
             </span>
 
             {/* Streak Pill Header */}
-            <div className="flex items-center gap-1 text-xs font-mono text-[#CCFF00]">
-              <Flame className="w-3.5 h-3.5 fill-[#CCFF00]/20 animate-pulse" />
+            <div className={`flex items-center gap-1 text-xs font-mono font-bold ${isFocusMode ? 'text-emerald-400' : 'text-emerald-600'}`}>
+              <Flame className="w-3.5 h-3.5 fill-current animate-pulse" />
               <span>{currentStreakCount}d streak</span>
             </div>
           </div>
@@ -162,15 +161,15 @@ export default function ChallengeDay() {
           {/* Focus Mode Toggle Button */}
           <button
             onClick={() => setIsFocusMode(!isFocusMode)}
-            className={`p-1.5 rounded-xl border text-xs font-mono flex items-center gap-1 transition-all active-press ${
+            className={`p-1.5 rounded-full border text-xs font-mono flex items-center gap-1 transition-all active-press ${
               isFocusMode
-                ? 'bg-[#CCFF00] text-[#09090B] border-[#CCFF00] font-bold shadow-[0_0_12px_rgba(204,255,0,0.3)]'
-                : 'bg-[#18181B] text-[#A1A1AA] border-[#27272A] hover:text-[#F5F5F5]'
+                ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold shadow-[0_2px_10px_rgba(16,185,129,0.3)]'
+                : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900 shadow-xs'
             }`}
-            title="Toggle Focus / Night Mode"
+            title="Toggle Focus Mode"
           >
             <Moon className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{isFocusMode ? 'Focused' : 'Focus'}</span>
+            <span className="hidden sm:inline font-bold">{isFocusMode ? 'Focused' : 'Focus'}</span>
           </button>
         </div>
       </header>
@@ -178,31 +177,31 @@ export default function ChallengeDay() {
       <main className="px-4 pt-3 space-y-5">
         {/* Evaluator Demo State Selector */}
         {!isFocusMode && (
-          <div className="bg-[#18181B]/80 border border-[#27272A] rounded-xl p-2 flex items-center justify-between gap-1 text-[11px] font-mono">
-            <span className="text-[#A1A1AA] flex items-center gap-1 pl-1">
-              <Sliders className="w-3.5 h-3.5 text-[#CCFF00]" /> Preset State:
+          <div className="bg-white border border-slate-200/90 rounded-2xl p-2 flex items-center justify-between gap-1 text-[11px] font-mono shadow-xs">
+            <span className="text-slate-500 flex items-center gap-1 pl-1 font-medium">
+              <Sliders className="w-3.5 h-3.5 text-emerald-600" /> Preset State:
             </span>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setDemoState('active')}
-                className={`px-2 py-1 rounded-md transition-all ${
-                  demoState === 'active' ? 'bg-[#CCFF00] text-[#09090B] font-bold' : 'text-[#A1A1AA]'
+                className={`px-2.5 py-1 rounded-full transition-all font-semibold ${
+                  demoState === 'active' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600'
                 }`}
               >
                 In Progress
               </button>
               <button
                 onClick={() => setDemoState('completed')}
-                className={`px-2 py-1 rounded-md transition-all ${
-                  demoState === 'completed' ? 'bg-emerald-400 text-[#09090B] font-bold' : 'text-[#A1A1AA]'
+                className={`px-2.5 py-1 rounded-full transition-all font-semibold ${
+                  demoState === 'completed' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600'
                 }`}
               >
                 Verified ✓
               </button>
               <button
                 onClick={() => setDemoState('missed')}
-                className={`px-2 py-1 rounded-md transition-all ${
-                  demoState === 'missed' ? 'bg-amber-400 text-[#09090B] font-bold' : 'text-[#A1A1AA]'
+                className={`px-2.5 py-1 rounded-full transition-all font-semibold ${
+                  demoState === 'missed' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600'
                 }`}
               >
                 Missed
@@ -213,10 +212,10 @@ export default function ChallengeDay() {
 
         {/* Missed Day Recovery Warning Notice */}
         {demoState === 'missed' && (
-          <div className="p-3 bg-amber-500/10 border border-amber-500/40 rounded-2xl flex items-start gap-2.5 text-xs text-amber-300">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-2.5 text-xs text-amber-800">
+            <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <div>
-              <strong className="block font-bold text-amber-200">Streak Recovery Mode Active</strong>
+              <strong className="block font-bold text-amber-900">Streak Recovery Mode Active</strong>
               Complete and verify today&apos;s proof of work to lock in Day 12 and restart your momentum engine!
             </div>
           </div>
@@ -224,104 +223,128 @@ export default function ChallengeDay() {
 
         {/* ================= 2. DAY HERO ================= */}
         <section
-          className={`rounded-2xl p-4 relative overflow-hidden transition-all ${
+          className={`rounded-2xl p-5 relative overflow-hidden transition-all ${
             isFocusMode
-              ? 'bg-[#0E0E12] border border-[#CCFF00]/40 shadow-[0_0_25px_rgba(204,255,0,0.1)]'
-              : 'bg-[#111113] border border-[#27272A]'
+              ? 'bg-[#111728] border border-emerald-500/40 shadow-[0_0_25px_rgba(16,185,129,0.15)]'
+              : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
           }`}
         >
-          <div className="flex items-center justify-between gap-2 mb-2">
+          <div className="flex items-center justify-between gap-2 mb-2.5">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black font-mono text-[#09090B] bg-[#CCFF00] px-2.5 py-0.5 rounded-md font-bold">
+              <span className={`text-xs font-black font-mono px-2.5 py-0.5 rounded-full font-bold shadow-xs ${
+                isFocusMode ? 'bg-emerald-500 text-slate-950' : 'bg-emerald-600 text-white'
+              }`}>
                 DAY {currentDayNum}
               </span>
-              <span className="text-[11px] font-semibold text-[#CCFF00] bg-[#CCFF00]/10 px-2 py-0.5 rounded-md border border-[#CCFF00]/30 font-mono">
+              <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border font-mono ${
+                isFocusMode
+                  ? 'text-emerald-400 bg-emerald-400/10 border-emerald-400/30'
+                  : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+              }`}>
                 {todayChallenge.difficulty}
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-xs text-[#A1A1AA] font-mono">
-              <Clock className="w-3.5 h-3.5 text-[#CCFF00]" />
+            <div className={`flex items-center gap-1 text-xs font-mono ${isFocusMode ? 'text-slate-400' : 'text-slate-500'}`}>
+              <Clock className="w-3.5 h-3.5 text-emerald-500" />
               <span>~45 min</span>
             </div>
           </div>
 
-          <h1 className="text-xl font-black text-[#F5F5F5] tracking-tight mb-1">
+          <h1 className={`text-xl font-black tracking-tight mb-1 ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>
             {todayChallenge.title}
           </h1>
 
           {/* Motivational Hero Callout */}
-          <div className="mt-2.5 pt-2.5 border-t border-[#27272A] flex items-center justify-between text-xs">
-            <span className="text-[#CCFF00] font-mono font-bold flex items-center gap-1.5">
-              <Flame className="w-4 h-4 text-[#CCFF00] fill-[#CCFF00]/30 animate-pulse" />
+          <div className={`mt-3 pt-3 border-t flex items-center justify-between text-xs ${
+            isFocusMode ? 'border-slate-800' : 'border-slate-100'
+          }`}>
+            <span className="text-emerald-600 font-mono font-bold flex items-center gap-1.5">
+              <Flame className="w-4 h-4 fill-emerald-500/20 animate-pulse" />
               One more day. Keep the streak alive.
             </span>
-            <span className="text-[11px] font-mono text-[#A1A1AA]">
+            <span className={`text-[11px] font-mono ${isFocusMode ? 'text-slate-400' : 'text-slate-500'}`}>
               {currentStreakCount} Days Streak
             </span>
           </div>
         </section>
 
         {/* ================= 3. MISSION BRIEF ================= */}
-        <section className="bg-[#111113] border border-[#27272A] rounded-2xl p-4 space-y-3">
+        <section className={`rounded-2xl p-5 space-y-3 ${
+          isFocusMode ? 'bg-[#111728] border border-slate-800' : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+        }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-[#CCFF00]" />
-              <h2 className="text-xs font-bold text-[#F5F5F5] uppercase tracking-wider font-mono">
+              <Terminal className="w-4 h-4 text-emerald-600" />
+              <h2 className={`text-xs font-bold uppercase tracking-wider font-mono ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>
                 Mission Brief & Requirements
               </h2>
             </div>
-            <span className="text-[10px] font-mono text-[#CCFF00] bg-[#CCFF00]/10 px-2 py-0.5 rounded border border-[#CCFF00]/30">
+            <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border font-bold ${
+              isFocusMode
+                ? 'text-emerald-400 bg-emerald-400/10 border-emerald-400/30'
+                : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+            }`}>
               CRUD Architecture
             </span>
           </div>
 
-          <p className="text-xs text-[#A1A1AA] leading-relaxed font-normal">
+          <p className={`text-xs leading-relaxed font-normal ${isFocusMode ? 'text-slate-300' : 'text-slate-600'}`}>
             Build a robust Node.js/Express REST API supporting CRUD operations with JSON payload handling and standard HTTP status responses.
           </p>
 
           {/* Scannable Requirement Cards */}
           <div className="grid grid-cols-2 gap-2 text-xs font-mono pt-1">
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl space-y-1">
-              <span className="text-[10px] text-[#CCFF00] font-bold block uppercase">POST /api/items</span>
-              <span className="text-[#F5F5F5] font-sans text-[11px] block">Create resource</span>
+            <div className={`p-3 rounded-xl border space-y-1 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800' : 'bg-slate-50 border-slate-200/80'
+            }`}>
+              <span className="text-[10px] text-emerald-600 font-bold block uppercase">POST /api/items</span>
+              <span className={`font-sans text-[11px] block ${isFocusMode ? 'text-slate-200' : 'text-slate-800'}`}>Create resource</span>
             </div>
 
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl space-y-1">
-              <span className="text-[10px] text-sky-400 font-bold block uppercase">GET /api/items</span>
-              <span className="text-[#F5F5F5] font-sans text-[11px] block">Read resources</span>
+            <div className={`p-3 rounded-xl border space-y-1 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800' : 'bg-slate-50 border-slate-200/80'
+            }`}>
+              <span className="text-[10px] text-sky-600 font-bold block uppercase">GET /api/items</span>
+              <span className={`font-sans text-[11px] block ${isFocusMode ? 'text-slate-200' : 'text-slate-800'}`}>Read resources</span>
             </div>
 
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl space-y-1">
-              <span className="text-[10px] text-amber-400 font-bold block uppercase">PUT /api/items/:id</span>
-              <span className="text-[#F5F5F5] font-sans text-[11px] block">Update resource</span>
+            <div className={`p-3 rounded-xl border space-y-1 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800' : 'bg-slate-50 border-slate-200/80'
+            }`}>
+              <span className="text-[10px] text-amber-600 font-bold block uppercase">PUT /api/items/:id</span>
+              <span className={`font-sans text-[11px] block ${isFocusMode ? 'text-slate-200' : 'text-slate-800'}`}>Update resource</span>
             </div>
 
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl space-y-1">
-              <span className="text-[10px] text-rose-400 font-bold block uppercase">DELETE /api/items/:id</span>
-              <span className="text-[#F5F5F5] font-sans text-[11px] block">Delete resource</span>
+            <div className={`p-3 rounded-xl border space-y-1 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800' : 'bg-slate-50 border-slate-200/80'
+            }`}>
+              <span className="text-[10px] text-rose-600 font-bold block uppercase">DELETE /api/items/:id</span>
+              <span className={`font-sans text-[11px] block ${isFocusMode ? 'text-slate-200' : 'text-slate-800'}`}>Delete resource</span>
             </div>
           </div>
         </section>
 
         {/* ================= 4. WHAT TO BUILD (CHECKLIST) ================= */}
-        <section className="bg-[#111113] border border-[#27272A] rounded-2xl p-4 space-y-3">
+        <section className={`rounded-2xl p-5 space-y-3 ${
+          isFocusMode ? 'bg-[#111728] border border-slate-800' : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+        }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-[#CCFF00]" />
-              <h2 className="text-xs font-bold text-[#F5F5F5] uppercase tracking-wider font-mono">
+              <Code2 className="w-4 h-4 text-emerald-600" />
+              <h2 className={`text-xs font-bold uppercase tracking-wider font-mono ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>
                 What To Build (Checklist)
               </h2>
             </div>
-            <span className="text-xs font-mono text-[#CCFF00] font-bold">
+            <span className="text-xs font-mono text-emerald-700 font-bold">
               {completedChecklistCount}/{checklist.length} ({checklistPercent}%)
             </span>
           </div>
 
           {/* Micro Progress Bar */}
-          <div className="w-full h-1.5 bg-[#18181B] rounded-full overflow-hidden border border-[#27272A]">
+          <div className={`w-full h-1.5 rounded-full overflow-hidden ${isFocusMode ? 'bg-slate-800' : 'bg-slate-200/80'}`}>
             <div
-              className="h-full bg-[#CCFF00] transition-all duration-300"
+              className="h-full bg-emerald-600 transition-all duration-300"
               style={{ width: `${checklistPercent}%` }}
             />
           </div>
@@ -333,14 +356,18 @@ export default function ChallengeDay() {
                 onClick={() => toggleChecklistItem(item.id)}
                 className={`w-full text-left p-3 rounded-xl border flex items-center gap-3 transition-all duration-150 active-press ${
                   item.completed
-                    ? 'bg-[#18181B] border-emerald-500/40 text-emerald-300'
-                    : 'bg-[#18181B]/50 border-[#27272A] text-[#F5F5F5] hover:border-[#3F3F46]'
+                    ? isFocusMode
+                      ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-300'
+                      : 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                    : isFocusMode
+                    ? 'bg-[#0A0F1D] border-slate-800 text-slate-300'
+                    : 'bg-slate-50/80 border-slate-200/80 text-slate-800 hover:border-slate-300'
                 }`}
               >
                 {item.completed ? (
-                  <CheckSquare className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
+                  <CheckSquare className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
                 ) : (
-                  <Square className="w-4.5 h-4.5 text-[#71717A] shrink-0" />
+                  <Square className="w-4.5 h-4.5 text-slate-400 shrink-0" />
                 )}
                 <span className={`text-xs font-medium leading-snug ${item.completed ? 'line-through opacity-80' : ''}`}>
                   {item.label}
@@ -351,29 +378,39 @@ export default function ChallengeDay() {
         </section>
 
         {/* ================= 5. SUCCESS CRITERIA ================= */}
-        <section className="bg-[#111113] border border-[#27272A] rounded-2xl p-4 space-y-2.5">
+        <section className={`rounded-2xl p-5 space-y-2.5 ${
+          isFocusMode ? 'bg-[#111728] border border-slate-800' : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+        }`}>
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#CCFF00]" />
-            <h2 className="text-xs font-bold text-[#F5F5F5] uppercase tracking-wider font-mono">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <h2 className={`text-xs font-bold uppercase tracking-wider font-mono ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>
               Success Criteria
             </h2>
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-[11px] font-sans">
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl flex items-center gap-2">
-              <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className={`p-2.5 rounded-xl border flex items-center gap-2 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200/80 text-slate-700'
+            }`}>
+              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 font-bold" />
               <span>API runs on local port</span>
             </div>
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl flex items-center gap-2">
-              <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className={`p-2.5 rounded-xl border flex items-center gap-2 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200/80 text-slate-700'
+            }`}>
+              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 font-bold" />
               <span>CRUD endpoints work</span>
             </div>
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl flex items-center gap-2">
-              <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className={`p-2.5 rounded-xl border flex items-center gap-2 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200/80 text-slate-700'
+            }`}>
+              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 font-bold" />
               <span>Pushed to GitHub</span>
             </div>
-            <div className="p-2.5 bg-[#18181B] border border-[#27272A] rounded-xl flex items-center gap-2">
-              <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className={`p-2.5 rounded-xl border flex items-center gap-2 ${
+              isFocusMode ? 'bg-[#0A0F1D] border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200/80 text-slate-700'
+            }`}>
+              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 font-bold" />
               <span>Proof submitted</span>
             </div>
           </div>
@@ -382,33 +419,37 @@ export default function ChallengeDay() {
         {/* ================= 6. PROOF OF WORK SUBMISSION ================= */}
         <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-xs font-bold font-mono text-[#A1A1AA] uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#CCFF00]" /> Submit Proof of Work
+            <h2 className={`text-xs font-bold font-mono uppercase tracking-wider flex items-center gap-1.5 ${
+              isFocusMode ? 'text-slate-400' : 'text-slate-500'
+            }`}>
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Submit Proof of Work
             </h2>
-            <span className="text-[11px] font-mono text-[#CCFF00]">
+            <span className="text-[11px] font-mono text-emerald-700 font-bold">
               {isFullyCompleted ? 'Both Verified ✓' : '2 Submissions Required'}
             </span>
           </div>
 
           {/* GITHUB PROOF CARD */}
-          <div className="bg-[#111113] border border-[#27272A] rounded-2xl p-4 space-y-3">
+          <div className={`rounded-2xl p-5 space-y-3 ${
+            isFocusMode ? 'bg-[#111728] border border-slate-800' : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+          }`}>
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-[#18181B] border border-[#27272A] flex items-center justify-center text-[#F5F5F5]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-900 font-bold shadow-xs">
                   <GithubIcon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-[#F5F5F5]">GitHub Proof</h3>
-                  <span className="text-[10px] text-[#A1A1AA] font-mono block">Repository or Commit URL</span>
+                  <h3 className={`text-xs font-bold ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>GitHub Proof</h3>
+                  <span className={`text-[10px] font-mono block ${isFocusMode ? 'text-slate-400' : 'text-slate-500'}`}>Repository or Commit URL</span>
                 </div>
               </div>
 
               {githubVerified ? (
-                <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/30 flex items-center gap-1">
+                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
                   <Check className="w-3 h-3" /> Verified
                 </span>
               ) : (
-                <span className="text-[10px] font-mono text-[#A1A1AA]">Pending</span>
+                <span className="text-[10px] font-mono text-slate-400">Pending</span>
               )}
             </div>
 
@@ -419,7 +460,11 @@ export default function ChallengeDay() {
                 value={githubUrl}
                 onChange={(e) => setGithubUrl(e.target.value)}
                 placeholder="https://github.com/username/project/commit/..."
-                className="w-full px-3 py-2 bg-[#18181B] border border-[#27272A] rounded-xl text-xs text-[#F5F5F5] placeholder-[#71717A] focus:outline-none focus:border-[#CCFF00] focus:ring-1 focus:ring-[#CCFF00] font-mono"
+                className={`w-full px-3.5 py-2.5 border rounded-xl text-xs font-mono focus:outline-none focus:border-emerald-500 ${
+                  isFocusMode
+                    ? 'bg-[#0A0F1D] border-slate-800 text-white placeholder-slate-500'
+                    : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white'
+                }`}
               />
 
               <Button
@@ -436,24 +481,26 @@ export default function ChallengeDay() {
           </div>
 
           {/* LINKEDIN PROOF CARD */}
-          <div className="bg-[#111113] border border-[#27272A] rounded-2xl p-4 space-y-3">
+          <div className={`rounded-2xl p-5 space-y-3 ${
+            isFocusMode ? 'bg-[#111728] border border-slate-800' : 'bg-white border border-slate-200/90 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.03)]'
+          }`}>
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-[#18181B] border border-[#27272A] flex items-center justify-center text-sky-400">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-sky-600 font-bold shadow-xs">
                   <LinkedinIcon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-[#F5F5F5]">LinkedIn Proof</h3>
-                  <span className="text-[10px] text-[#A1A1AA] font-mono block">Public Post URL</span>
+                  <h3 className={`text-xs font-bold ${isFocusMode ? 'text-white' : 'text-slate-900'}`}>LinkedIn Proof</h3>
+                  <span className={`text-[10px] font-mono block ${isFocusMode ? 'text-slate-400' : 'text-slate-500'}`}>Public Post URL</span>
                 </div>
               </div>
 
               {linkedinVerified ? (
-                <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/30 flex items-center gap-1">
+                <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
                   <Check className="w-3 h-3" /> Verified
                 </span>
               ) : (
-                <span className="text-[10px] font-mono text-[#A1A1AA]">Pending</span>
+                <span className="text-[10px] font-mono text-slate-400">Pending</span>
               )}
             </div>
 
@@ -464,7 +511,11 @@ export default function ChallengeDay() {
                 value={linkedinUrl}
                 onChange={(e) => setLinkedinUrl(e.target.value)}
                 placeholder="https://linkedin.com/posts/username/..."
-                className="w-full px-3 py-2 bg-[#18181B] border border-[#27272A] rounded-xl text-xs text-[#F5F5F5] placeholder-[#71717A] focus:outline-none focus:border-[#CCFF00] focus:ring-1 focus:ring-[#CCFF00] font-mono"
+                className={`w-full px-3.5 py-2.5 border rounded-xl text-xs font-mono focus:outline-none focus:border-emerald-500 ${
+                  isFocusMode
+                    ? 'bg-[#0A0F1D] border-slate-800 text-white placeholder-slate-500'
+                    : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white'
+                }`}
               />
 
               <Button
@@ -487,33 +538,33 @@ export default function ChallengeDay() {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-5 rounded-2xl bg-[#111113] border-2 border-[#CCFF00] text-center space-y-3 shadow-[0_0_30px_rgba(204,255,0,0.2)]"
+              className="p-6 rounded-2xl bg-white border-2 border-emerald-500 text-center space-y-4 shadow-[0_4px_25px_rgba(22,163,74,0.15)]"
             >
-              <div className="w-12 h-12 rounded-full bg-[#CCFF00]/10 border border-[#CCFF00]/40 flex items-center justify-center mx-auto text-[#CCFF00] shadow-[0_0_15px_rgba(204,255,0,0.3)]">
-                <Flame className="w-6 h-6 fill-[#CCFF00]/30 animate-pulse" />
+              <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto text-emerald-600 shadow-xs">
+                <Flame className="w-6 h-6 text-emerald-600 fill-emerald-500/20 animate-pulse" />
               </div>
 
               <div>
-                <h3 className="text-xl font-black text-[#F5F5F5] tracking-tight uppercase">
-                  Day 12 complete 🔥
+                <h3 className="text-xl font-black text-slate-900 tracking-tight uppercase">
+                  DAY 12 COMPLETE 🔥
                 </h3>
-                <p className="text-xs text-[#CCFF00] font-mono font-bold mt-0.5">
+                <p className="text-xs text-emerald-700 font-mono font-bold mt-0.5">
                   Streak preserved! 12 Days Unbroken
                 </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#27272A] text-center font-mono">
+              <div className="grid grid-cols-3 gap-2 py-3 border-y border-slate-100 text-center font-mono">
                 <div>
-                  <span className="text-[10px] text-[#A1A1AA] block">Completed</span>
-                  <span className="text-sm font-bold text-[#F5F5F5]">12 / 60</span>
+                  <span className="text-[10px] text-slate-500 block">Completed</span>
+                  <span className="text-sm font-bold text-slate-900">12 / 60</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#A1A1AA] block">Overall</span>
-                  <span className="text-sm font-bold text-[#CCFF00]">20% Done</span>
+                  <span className="text-[10px] text-slate-500 block">Overall</span>
+                  <span className="text-sm font-bold text-emerald-600">20% Done</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-[#A1A1AA] block">Reward</span>
-                  <span className="text-sm font-bold text-[#F5F5F5]">+150 XP</span>
+                  <span className="text-[10px] text-slate-500 block">Reward</span>
+                  <span className="text-sm font-bold text-slate-900">+150 XP</span>
                 </div>
               </div>
 
@@ -523,17 +574,17 @@ export default function ChallengeDay() {
                 fullWidth
                 icon={ArrowLeft}
                 onClick={() => navigate('/dashboard')}
-                className="text-base py-3.5 shadow-[0_0_25px_rgba(204,255,0,0.3)]"
+                className="text-base py-3.5 shadow-[0_4px_16px_rgba(22,163,74,0.25)]"
               >
                 Back to Dashboard
               </Button>
             </motion.div>
           ) : (
-            <div className="p-4 rounded-2xl bg-[#111113] border border-[#27272A] text-center space-y-2">
-              <span className="text-xs font-mono font-bold text-[#CCFF00] uppercase tracking-wider block">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/90 text-center space-y-2 shadow-xs">
+              <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-wider block">
                 Complete Today&apos;s Mission
               </span>
-              <p className="text-xs text-[#A1A1AA]">
+              <p className="text-xs text-slate-600">
                 Verify both GitHub & LinkedIn proof URLs above to lock in Day 12 and preserve your 11-day streak.
               </p>
             </div>
@@ -543,18 +594,20 @@ export default function ChallengeDay() {
 
       {/* Focus Mode Ambient Banner at Bottom */}
       {isFocusMode && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#050507]/95 backdrop-blur-xl border-t border-[#CCFF00]/40 p-3 max-w-md mx-auto flex items-center justify-between text-xs font-mono shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
-            <span className="text-[#F5F5F5] font-bold">Focus Mode Active</span>
-          </div>
+        <div className="fixed bottom-3 left-0 right-0 z-50 px-4 pointer-events-none">
+          <div className="max-w-[390px] mx-auto bg-[#0A0F1D]/95 backdrop-blur-xl border border-emerald-500/40 shadow-[0_8px_30px_rgba(0,0,0,0.8)] rounded-full py-2 px-5 pointer-events-auto flex items-center justify-between text-xs font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="text-white font-bold">Focus Mode Active</span>
+            </div>
 
-          <button
-            onClick={() => navigate('/dashboard')}
-            className="px-3 py-1.5 bg-[#CCFF00] text-[#09090B] font-bold rounded-lg text-xs"
-          >
-            Dashboard
-          </button>
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="px-3 py-1.5 bg-emerald-500 text-slate-950 font-bold rounded-full text-xs"
+            >
+              Dashboard
+            </button>
+          </div>
         </div>
       )}
 
